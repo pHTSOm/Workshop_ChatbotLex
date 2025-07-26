@@ -1,0 +1,141 @@
+[
+{
+	"uri": "//localhost:1313/vi/",
+	"title": "Chatbot Lex",
+	"tags": [],
+	"description": "",
+	"content": "Tạo chatbot Lex có sử dụng knowledge base được cung cấp bởi Amazon Bedrock Tổng quan Trong bài workshop này, bạn sẽ tạo cho mình một trợ lý hỗ trợ khách hàng bằng Amazon Lex và tận dụng knowledge base được cung cấp bởi Amazon Bedrock\nNội dung Introduction Preparation Connect to EC2 instance Manage session logs Port Forwarding Clean up resources "
+},
+{
+	"uri": "//localhost:1313/vi/2-prerequisite/2.3-createidentitypool/2.3.1-createidentitypool/",
+	"title": "Tạo Identity Pool",
+	"tags": [],
+	"description": "",
+	"content": "Create Identity Pool Truy cập đến giao diện quản trị của dịch vụ Amazon Cognito Click Identity Pool. Click Create Identity Pool. Tại trang Create identity pool . Ở mục Configure Identity Pool Trust, Chúng ta sẽ chọn Guest Access. Việc này giúp những người dùng có thể sử dụng chatbot dù cho họ chưa đăng nhập vào trang . Khi chọn Guest access, người dùng không cần đăng nhập vẫn có thể sử dụng chatbot. Hệ thống sẽ cấp thông tin xác thực tạm thời (temporary credentials) thông qua danh tính chưa xác thực (unauthenticated identity) do Amazon Cognito quản lý. Điều này giúp dễ dàng tích hợp chatbot vào website công khai mà không cần hệ thống đăng nhập., cho phép người dùng được sử dụng Lẽ một cách an toàn mà không cần phải cung cấp thông tin hay phải đăng nhập. Click Next Tại bước Configure permissions, chúng ta sẽ chọn tạo một IAM role mới và đặt tên là RoleCognitoforChatbotLex. Tại bước Configure properties, chúng ta sẽ chọn tên cho Identity pool ví dụ LexFrontendGuestPool. Cuôi cùng chúng ta sẽ xem lại thông tin và tạo identity pool. "
+},
+{
+	"uri": "//localhost:1313/vi/3-createchatbot/3.2-create-chatbot/3.2.2-createintentforchatbot/3.2.2.1-createintentmanually/",
+	"title": "Tạo Intent thủ công ",
+	"tags": [],
+	"description": "",
+	"content": "Tạo thủ công Truy cập đến Giao diện quản trị của Amazon Lex Click vào chatbot ta đã tạo. Click Intents. Click Add Intent. Chọn Add empty intent. Chúng ta sẽ đặt tên cho Intent này là WelcomeIntent. Ở phần Sample utterances . Chúng ta có thể thêm một vài câu truy vấn mà người dùng có thể cho như là: hi, hello, ola,\u0026hellip; Tại phần Initial response . Chúng ta có thể cung cấp những tin nhắn nhận biết được yêu cầu của người dùng. Chúng ta có thể tuỳ chỉnh cho con chatbot đợi câu truy vấn tiếp theo của người sử dụng tại phần Advance Options Tại phần Advance Options, Click Set values sau đó chọn Wait for users input Chọn Save Intent Bây giờ chúng ta đã có thể build và test chatbot. "
+},
+{
+	"uri": "//localhost:1313/vi/3-createchatbot/3.1-create-a-knowledge-base/",
+	"title": "Tạo Knowledge báe ",
+	"tags": [],
+	"description": "",
+	"content": " Truy cập vào Bảng điều khiển Amazon Bedrock Chọn Knowledge Bases. Click Create và chọn Knowledge base with vector store. Ở bước Provide knowledge base detail: Chúng ta sẽ đặt tên cho Knowledge base ví dụ như: KnowledgeBaseforChatbotLex Chọn Create and use a new service role Giữ những lựa chọn khác ở mặc định và sang bước tiếp theo. Tại bước Configure data source: Ở phần S3 URI, chọn browse S3 Chọn bucket chúng ta đã tạo trước đó. Click Next Ở bước Configure data storage and processing: Click Select model Tại Category, chọn Amazon sau đó là Titan Embedding G1 - Text V1.2 Click Apply Chọn Amazon Opensearch Serverless cho phần Vector store type. Kiểm tra lại thông tin của knowledge base sau đó tạo. Sau khi tạo thành công knowledge base chúng ta cần phải sync nguồn dữ liệu cho knowledge base Tại phần Data Source chọn vào tên nguồn dữ liệu đã tạo sau đó click Sync. Tiếp theo chúng ta sẽ tạo chatbot. "
+},
+{
+	"uri": "//localhost:1313/vi/2-prerequisite/2.1-cloneweb/",
+	"title": "Clone website",
+	"tags": [],
+	"description": "",
+	"content": "Ở bước này, chúng ta sẽ clone một website sử dụng để kết nối với chatbot Lex.\nCopy link này https://github.com/pHTSOm/workshop_website_frontend.git Mở IDE Visual Studio code Ở thanh điều hướng chọn Source Control Click Clone Repository Sau đó dán link chúng ta copy ở bước trước đó. Nhấn Enter. Chúng ta có thể chạy thử sản phẩm bằng câu lệnh npm install sau đó là npm start. "
+},
+{
+	"uri": "//localhost:1313/vi/1-introduce/",
+	"title": "Giới thiệu",
+	"tags": [],
+	"description": "",
+	"content": "Amazon Lex cung cấp giao diện hội thoại thông minh nhờ tích hợp tính năng sử dụng bằng giọng nói và văn bản. Nó sở hữu khả năng hiểu ngôn ngữ tự nhiên, cho phép nắm bắt và đáp ứng ý định của người dùng một cách chính xác và nhanh chóng hơn.\nAmazon Bedrock giúp việc xây dựng và mở rộng các hệ thống AI tạo sinh trở nên dễ dàng hơn, thông qua việc sử dụng các mô hình ngôn ngữ lớn (LLMs) và các mô hình nền (FMs). Amazon Bedrock cung cấp quyền truy cập vào nhiều mô hình nền đến từ các nhà cung cấp hàng đầu như Anthropic Claude, AI21 Labs, Cohere, và Stability AI, cũng như các mô hình Amazon Titan do chính Amazon phát triển. Ngoài ra, Amazon Bedrock Knowledge Bases cho phép bạn xây dựng các ứng dụng tận dụng kỹ thuật Truy xuất Tăng cường Sinh ngữ (Retrieval Augmented Generation – RAG), một phương pháp giúp mô hình tạo ra câu trả lời chính xác và có ngữ cảnh hơn bằng cách truy xuất thông tin liên quan từ các nguồn dữ liệu.\nGiải pháp sử dụng Amazon Lex, Amazon Simple Storage Service (Amazon S3), và Amazon Bedrock theo các bước sau:\nNgười dùng tương tác với chatbot thông qua giao diện web có sẵn của Amazon Lex. Amazon Lex xử lý từng yêu cầu của người dùng để nhận diện ý định bằng thuật toán nhận diện ý định. Amazon Lex có công cụ AI tạo sinh tích hợp sẵn mang tên QnAIntent, có thể liên kết trực tiếp với một Knowledge Base để đáp ứng yêu cầu người dùng. Quản lý người dùng tập trung thông qua AWS IAM. Truy cập vào máy chủ dễ dàng và nhanh chóng chỉ với một cú nhấp chuột. Thời gian truy cập nhanh hơn so với các phương pháp truyền thống như SSH. Hỗ trợ nhiều hệ điều hành khác nhau như Linux, Windows, MacOS. Ghi lại các phiên kết nối và lệnh đã thực thi trong quá trình kết nối đến máy chủ. "
+},
+{
+	"uri": "//localhost:1313/vi/3-createchatbot/3.2-create-chatbot/3.2.1-createlexchatbot/",
+	"title": "Kích hoạt DNS hostnames",
+	"tags": [],
+	"description": "",
+	"content": "Dùng Amazon Lex để tạo chatbot. Truy cập vào Bảng điều khiển cho Amazon Lex Click Create bot. Tại trang Configure bot settings. Click chọn Create a blank bot. Đặt tên cho chat bot ví dụ như: Shopbot Click chọn Create a role with Amazon Lex permissions. Chúng ta có thể giữ những tuỳ chỉnh khác ở mặc định. Click Next Ở trang Add languages . Chúng ta có thể chọn ngôn ngữ và loại giọng nói mà mình thích. Tôi chọn tiếng Anh và để mặc định cho những tuỳ chọn khác "
+},
+{
+	"uri": "//localhost:1313/vi/3-createchatbot/3.2-create-chatbot/3.2.2-createintentforchatbot/3.2.2.2-createbuiltin-intent/",
+	"title": "Tạo Built-in intent",
+	"tags": [],
+	"description": "",
+	"content": "Tạo Built-in intent Truy cập đến giao diện quản trị của AmazonLex Click on the bot we just created. Click Intents. Click Add Intent. Chọn Use built-in intent. Chọn QnAbotIntent Tại trang cấu hình intent, Kéo xuống phần QnA configuration. Chọn Anthropic và Claude V2 Tại phần Choose a knowledge store, Chọn Knowledge base for Amazon bedrock Điền vào ID của knowledge base ta đã tạo từ trước. Click Save Intent Bây giờ chúng ta đã có thể build và test chatbot. "
+},
+{
+	"uri": "//localhost:1313/vi/2-prerequisite/2.2-requestmodel/",
+	"title": "Tạo IAM Role",
+	"tags": [],
+	"description": "",
+	"content": "Request model Titan Embedding G1 - Text chỉ có thể dùng ở những khu vực như us-east-1 và us-west-2. Nên nhớ chuyển sang khu vực này trước khi tiếp tục section tiếp theo.\nIn this step, we will proceed to request access to some models we will use for Amazon Bedrock knowledge base\nỞ bước, này chúng ta sẽ yêu cầu truy cập và các model chúng ta cần sử dụng cho knowledge base của Amazon Bedrock\nTruy cập vào Bảng điều khiển Amazon Bedrock Ở thanh điều hướng bên trái, click Model Access. Trỏ con trỏ chuột vào Available to request sau đó click Request model access. Ở trang Edit model access chọn những model sau: Titan Embeddings G1 - Text. Claude Click Next\nClick Submit\nĐợi một vài giây và chúng ta đã có quyền truy cập vào những model cần thiết.\n"
+},
+{
+	"uri": "//localhost:1313/vi/3-createchatbot/3.2-create-chatbot/3.2.2-createintentforchatbot/",
+	"title": "Tạo Intent cho chatbot",
+	"tags": [],
+	"description": "",
+	"content": "Tạo Intent cho chatbot Chúng ta sẽ tạo intent bằng cách làm thủ công sau đó là sử dụng intent đã được tạo từ trước bởi Amazon sử dụng knowledge base chúng ta đã tạo\nContent: Tạo Intent thủ công Tạo built-in intent có kêt nôi với knowledge base Đăng tải chatbot và kết nối chatbot với website "
+},
+{
+	"uri": "//localhost:1313/vi/3-createchatbot/3.2-create-chatbot/",
+	"title": "Tạo và đăng tải chatbot",
+	"tags": [],
+	"description": "",
+	"content": "Ở bước này chúng ta sẽ tập trung tạo chatbot với dịch vụ Amazon Lex sau đó đăng tải chatbot để có thể kết nối với website của chúng ta\nNội dung: Tạo chatbot Tạo Intent cho chatbot Đăng tải và kết nối chatbot với website "
+},
+{
+	"uri": "//localhost:1313/vi/2-prerequisite/2.3-createidentitypool/2.3.2-attachpolicy/",
+	"title": "Thêm policy cho Role",
+	"tags": [],
+	"description": "",
+	"content": "Thêm policy vào role của Identity Pool đã tạo Truy cập vào Bảng điều khiển IAM. Chọn Roles Tìm đến role của Identity Pool vừa tạo và chọn vào, đối với tôi trong trường hợp này role của tôi có tên là RoleCognitoforChatbotLex Kéo xuống và tìm thẻ Permissions Click Add permissions. Chọn Create inline policy. Copy policy này vào Policy editor và lưu lại. {\r\u0026#34;Version\u0026#34;: \u0026#34;2012-10-17\u0026#34;,\r\u0026#34;Statement\u0026#34;: [\r{\r\u0026#34;Sid\u0026#34;: \u0026#34;Statement1\u0026#34;,\r\u0026#34;Effect\u0026#34;: \u0026#34;Allow\u0026#34;,\r\u0026#34;Action\u0026#34;: [\r\u0026#34;lex:StartConversation\u0026#34;,\r\u0026#34;lex:RecognizeText\u0026#34;,\r\u0026#34;lex:RecognizeUtterance\u0026#34;\r],\r\u0026#34;Resource\u0026#34;: [\r\u0026#34;*\u0026#34;\r]\r},\r{\r\u0026#34;Sid\u0026#34;: \u0026#34;Statement2\u0026#34;,\r\u0026#34;Effect\u0026#34;: \u0026#34;Allow\u0026#34;,\r\u0026#34;Action\u0026#34;: [\u0026#34;cognito-identity:GetCredentialsForIdentity\u0026#34;],\r\u0026#34;Resource\u0026#34;: [\u0026#34;*\u0026#34;]\r}\r]\r} Chúng ta đã thành công thêm policy cho role. "
+},
+{
+	"uri": "//localhost:1313/vi/2-prerequisite/",
+	"title": "Các bước chuẩn bị",
+	"tags": [],
+	"description": "",
+	"content": "Để kết nối chatbot Lex với trang web của chúng ta, trước tiên chúng ta sẽ tạo một identity pool và gắn policy IAM phù hợp cho vai trò (role) liên quan, nhằm đảm bảo khả năng giao tiếp an toàn với chatbot. Tiếp theo, chúng ta sẽ yêu cầu quyền truy cập vào model được sử dụng bởi Amazon Bedrock Knowledge Base. Cuối cùng, chúng ta sẽ tải lên một tệp policy mẫu vào Amazon S3 để sử dụng làm nguồn kiến thức cho knowledge base, cung cấp thông tin cho chatbot hỗ trợ trên trang web của cửa hàng.\nNội dung Tạo Identity pool và clone website Yêu cầu model cần thiết cho Amazon Bedrock "
+},
+{
+	"uri": "//localhost:1313/vi/3-createchatbot/3.2-create-chatbot/3.2.2-createintentforchatbot/3.2.2.3-publishandconnect/",
+	"title": "Đăng tải chatbot và kết nối chatbot vời website",
+	"tags": [],
+	"description": "",
+	"content": "Đăng tải và kết nối chatbot Truy cập vào Giao diện quản trị của Amazon Lex Click vào chatbot ta đã tạo.\nClick Versions.\nClick Create Version. Kéo xuống và click Create.\nTại thanh điều hướng bên trái click Aliases. Click Create Alias. Đặt tên cho Alias và lưu lại. Lưu lại alias ID và ID của chatbot Mở folder website trên visual studio code: Mở folder \u0026ldquo;public\u0026rdquo;. Mở file chatbot.html. Fill in your poolID, botname, region, bot_ID, bot_alias_ID, and the bot_localeID (which is en_US in this case). Điền vào những thông tin của bạn liên quan đến poolID, botname, region, bot_ID, bot_alias_ID, và bot_localeID (hiện tại là en_US tại bài này). Sau khi điền chính xác những thông tin trên thì ta đã có thể chạy app với câu lệnh npm install và npm start. "
+},
+{
+	"uri": "//localhost:1313/vi/3-createchatbot/",
+	"title": "Tạo kết nối đến máy chủ EC2",
+	"tags": [],
+	"description": "",
+	"content": "Ở phần này, chúng ta sẽ tạo một chatbot sử dụng Amazon Lex. Chatbot vô cùng tiện lợi trong việc nâng cao trải nghiệm sử dụng website cho người dùng. Chúng ta sẽ khám phá cách Amazon Lex sử dụng Knowledge Base trong Amazon Bedrock nhằm cung cấp các câu trả lời chính xác hơn. Khi người dùng cần sự hỗ trợ từ chatbot, model Amazon Titan embeddings sẽ chuyển câu hỏi của người dùng thành một vector. Điều này cho phép hệ thống truy xuất thông tin liên quan từ Knowledge Base. Cung cấp 1 ngữ cảnh giúp chatbot phản hồi chính xác và phù hợp hơn. Trong phần tiếp theo, chúng ta sẽ tìm hiểu cách tạo ra một chatbot hiệu quả, có khả năng hiểu câu hỏi của người dùng và tận dụng một Knowledge Base phù hợp để nâng cao chất lượng hội thoại.\nNội dung 3.1. Tạo knowledge base 3.2. Tạo chatbot\n"
+},
+{
+	"uri": "//localhost:1313/vi/2-prerequisite/2.3-createidentitypool/",
+	"title": "Chuẩn bị Identity pool và clone website ",
+	"tags": [],
+	"description": "",
+	"content": "Ở bước này chúng ta sẽ tạo một Identity Pool. Sau đó sẽ gắn policy nhằm kết nối với Amazon Lex.\nNội dung Tạo Identity Pool tại Amazon Cognito Thêm policy cho Role "
+},
+{
+	"uri": "//localhost:1313/vi/2-prerequisite/2.4-uploadamockpolicy/",
+	"title": "Tải file policy mẫu lên S3 bucket",
+	"tags": [],
+	"description": "",
+	"content": "In this step, we will proceed to upload a mock policy which will support for our chatbot.\nFirst go and download the policy here Go to Amazon S3 console Choose General Purpose then name the bucket StorePolicyBucket and keep the other option in default. After successfully create the bucket, click the bucket name. In the Upload interface, drag and drop the pdf file to upload. "
+},
+{
+	"uri": "//localhost:1313/vi/4-cleanup/",
+	"title": "Dọn dẹp tài nguyên  ",
+	"tags": [],
+	"description": "",
+	"content": "Chúng ta sẽ tiến hành các bước sau để xóa các tài nguyên chúng ta đã tạo trong bài thực hành này.\nXoá OpenSearch Truy cập vào Bảng điều khiển dịch vụ Amazon OpenSearch Click Dashboard. Chọn Bedrock Knowledge base. Click Delete Nhập \u0026ldquo;confirm\u0026rdquo; để hoàn thành xoá. Delete chatbot Truy cập vào Bảng điều khiển dịch vụ Amazon Lex Click Bots. Đánh dấu vào con chatbot cần xoá. Click Action. Chọn Delete Xác nhận xoá. Xoá Identity pool Truy cập vào Bảng điều khiển dịch vụ Amazon Lex Chọn vào Identity pools. Đánh dấu vào indentity pool cần xoá sau đó chọn Delete Nhập tên của identity pool để hoàn thành việc xoá. Xoá Knowledge Base Truy cập vào Bảng điều khiển dịch vụ Amazon Bedrock Click Knowledge Bases. Chọn knowledge base cần xoá. Click Delete. Xác nhận xoá Xoá S3 bucket Truy cập vào Bảng điều khiển dịch vụ Amazon S3 Chọn bucket chứa policy. Click Delete. Xác nhận xoá "
+},
+{
+	"uri": "//localhost:1313/vi/categories/",
+	"title": "Categories",
+	"tags": [],
+	"description": "",
+	"content": ""
+},
+{
+	"uri": "//localhost:1313/vi/tags/",
+	"title": "Tags",
+	"tags": [],
+	"description": "",
+	"content": ""
+}]
