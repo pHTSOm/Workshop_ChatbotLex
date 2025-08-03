@@ -1,6 +1,6 @@
 ---
 title : "Clone website"
-date :  "2024-01-15" 
+date :  "2025-07-14" 
 weight : 1 
 chapter : false
 pre : " <b> 2.1 </b> "
